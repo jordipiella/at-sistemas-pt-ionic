@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
     public appFacade: AppFacade
   ) { }
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 
   setLanguage(language: string): void {
     this.appFacade.setLanguage(language);
