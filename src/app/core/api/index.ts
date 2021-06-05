@@ -13,3 +13,6 @@ export * from './enums/genre.enum';
 
 // Contracts
 export * from './services/api-movies/mocks/movie-mock.contract';
+
+// Interfaces
+export * from './interfaces/pagination.interface';

@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { MovieContract } from './contracts/movie.contract';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { API_URL_MOVIES } from '../../../services/language/constants/api-url.constants';
+import { IPagination } from '../../interfaces/pagination.interface';
+import { IApiResponse } from '../../interfaces/response.interface';
 
 @Injectable({
     providedIn: 'root'
@@ -15,10 +17,13 @@ export class ApiMoviesService {
     private http: HttpClient
   ) { }
 
-  getAll(): Observable<MovieContract[]> {
-    return this.http.get(`${ environment.apiMoviesUrl }/${ API_URL_MOVIES }`)
+  getAll(queryParams?: IPagination): Observable<IApiResponse<MovieContract[]>> {
+    const params: HttpParams = new HttpParams({
+      fromObject: { ...queryParams }
+    });
+    return this.http.get(`${ environment.apiMoviesUrl }/${ API_URL_MOVIES }`, { params, observe: 'response' })
       .pipe(
-        map((movies: MovieContract[]) => movies)
+        map((res: HttpResponse<MovieContract>) => this.httpResToApiResponse(res))
       );
   }
 
@@ -48,6 +53,15 @@ export class ApiMoviesService {
       .pipe(
         map((movie: MovieContract) => movie)
       );
+  }
+
+  httpResToApiResponse(res: HttpResponse<any>): IApiResponse<any> {
+    const total: string =res?.headers?.get('X-Total-Count');
+    const apiRes: IApiResponse<any> = {
+      total: total ? parseInt(total) : null,
+      data: res.body
+    };
+    return apiRes;
   }
 
 }

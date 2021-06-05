@@ -1,5 +1,27 @@
 <app-header [title]="'movies.title' | translate"></app-header>
 
 <ion-content [fullscreen]="true">
-  {{ 'movies.title' | translate }}
+  <app-loading *ngIf="loading && !movies.length" [loading]="loading"></app-loading>
+
+  <ion-virtual-scroll [items]="movies" approxItemHeight="401px">
+    <ng-container *virtualItem="let movie">
+      <app-card>
+        <ng-template #header>
+          <div class="poster" [style.background-image]="'url(' + movie.poster + ')'"></div>
+          <ion-card-title>{{ movie.title }}</ion-card-title>
+        </ng-template>
+        <ng-template #content>
+          <ion-badge *ngFor="let badge of movie?.genre" color="primary">
+            #{{ badge }}
+          </ion-badge>
+        </ng-template>
+      </app-card>
+    </ng-container>
+  </ion-virtual-scroll>
+
+  <ion-infinite-scroll threshold="15%" (ionInfinite)="loadData($event)" position="bottom">
+    <ion-infinite-scroll-content>
+      <app-loading [loading]="movies?.length && loading"></app-loading>
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

@@ -2,8 +2,8 @@ import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MovieModel } from './models/movie.model';
-import { ApiMoviesService, MovieContract } from '@api';
-import { MoviesModule } from '../../movies.module';
+import { ApiMoviesService, MovieContract, IPagination } from '@api';
+import { IApiResponse } from '../../../../core/api/interfaces/response.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +14,10 @@ export class MoviesService {
     @Inject(ApiMoviesService) private apiMovies: ApiMoviesService
   ) { }
 
-  getAll(): Observable<MovieModel[]> {
-    return this.apiMovies.getAll()
+  getAll(queryParams?: IPagination): Observable<IApiResponse<MovieModel[]>> {
+    return this.apiMovies.getAll(queryParams)
       .pipe(
-        map((movies: MovieContract[]) => movies)
+        map((apiRes: IApiResponse<MovieContract[]>) => apiRes)
       );
   }
 
