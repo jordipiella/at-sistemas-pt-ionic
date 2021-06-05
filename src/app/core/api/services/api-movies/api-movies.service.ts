@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { API_URL_MOVIES } from '../../constants/api-url.constants';
 
 @Injectable()
-export class MovieService {
+export class ApiMoviesService {
 
   constructor(
     private http: HttpClient

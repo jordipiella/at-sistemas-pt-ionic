@@ -1,14 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@angular/common/http/testing';
-import { MovieService } from './movie.service';
+import { ApiMoviesService } from './api-movies.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { environment } from '../../../../../environments/environment';
 import { API_URL_MOVIES } from '../../constants/api-url.constants';
 import { MovieContract } from './contracts/movie.contract';
 import { movieMockContract } from './contracts/movie-mock.contract';
 
-describe('MovieService', () => {
-  let service: MovieService;
+describe('ApiMoviesService', () => {
+  let service: ApiMoviesService;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
@@ -18,10 +18,10 @@ describe('MovieService', () => {
         RouterTestingModule
       ],
       providers: [
-        MovieService
+        ApiMoviesService
       ]
     });
-    service = TestBed.inject(MovieService);
+    service = TestBed.inject(ApiMoviesService);
     httpMock = TestBed.inject(HttpTestingController);
   });
 
