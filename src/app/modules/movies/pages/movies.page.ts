@@ -70,7 +70,6 @@ export class MoviesPage implements OnInit, OnDestroy {
   loadingSubscription(): void {
     const loadingSubs: Subscription = this.appFacade.loading$
       .pipe(
-        tap(x => console.log(x)),
         tap((loading: boolean) => this.setLoading(loading))
       ).subscribe();
     this.subscriptions.push(loadingSubs);

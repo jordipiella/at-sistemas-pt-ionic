@@ -23,8 +23,7 @@ export class ApiMoviesService {
     });
     return this.http.get(`${ environment.apiMoviesUrl }/${ API_URL_MOVIES }`, { params, observe: 'response' })
       .pipe(
-        map((res: HttpResponse<MovieContract>) => this.httpResToApiResponse(res)),
-        tap(console.log)
+        map((res: HttpResponse<MovieContract>) => this.httpResToApiResponse(res))
       );
   }
 
