@@ -8,6 +8,7 @@ import { IApiResponse } from '../../../core/api/interfaces/response.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { of, Subscription } from 'rxjs';
 import { AppFacade } from '../../../core/services/app.facade';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movies',
@@ -26,7 +27,8 @@ export class MoviesPage implements OnInit, OnDestroy {
 
   constructor(
     private moviesFacade: MoviesFacade,
-    public appFacade: AppFacade
+    public appFacade: AppFacade,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -77,6 +79,13 @@ export class MoviesPage implements OnInit, OnDestroy {
 
   setLoading(value: boolean) {
     this.loading = value;
+  }
+
+  goToDetailPage(movie: MovieModel): void {
+    if (!movie?.id) {
+      return;
+    }
+    this.router.navigate([`movies/${ movie.id }`])
   }
 
 }

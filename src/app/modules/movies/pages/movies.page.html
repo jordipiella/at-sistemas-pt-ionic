@@ -5,7 +5,7 @@
 
   <ion-virtual-scroll [items]="movies" approxItemHeight="401px">
     <ng-container *virtualItem="let movie">
-      <app-card>
+      <app-card (click)="goToDetailPage(movie)">
         <ng-template #header>
           <div class="poster" [style.background-image]="'url(' + movie.poster + ')'"></div>
           <ion-card-title>{{ movie.title }}</ion-card-title>

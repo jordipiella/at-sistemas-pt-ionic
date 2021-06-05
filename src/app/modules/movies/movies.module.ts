@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { MoviesRoutingModule } from './movies-routing.module';
 import { IonicModule } from '@ionic/angular';
-import { MoviesPage } from './pages/movies.page';
 import { ApiModule } from '@api';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { httpLoaderFactory } from 'src/app/shared/utils/http-loader.factory';

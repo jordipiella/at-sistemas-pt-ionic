@@ -11,8 +11,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/movies-page.module').then( m => m.MoviesPageModule)
   },
   {
-    path: '**',
-    redirectTo: 'list'
+    path: ':movieId',
+    loadChildren: () => import('./pages/movies-detail/movies-detail-page.module').then( m => m.MoviesDetailPageModule)
   }
 ];
 

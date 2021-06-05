@@ -1,0 +1,30 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
+import { MoviesDetailPage } from './movies-detail.page';
+import { MoviesDetailPageRoutingModule } from './movies-detail-page-routing.module';
+import { HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { httpLoaderFactory } from '../../../../shared/utils/http-loader.factory';
+import { CoreModule } from '../../../../core/core.module';
+
+
+@NgModule({
+  declarations: [
+    MoviesDetailPage
+  ],
+  imports: [
+    CommonModule,
+    IonicModule,
+    MoviesDetailPageRoutingModule,
+    CoreModule,
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
+  ]
+})
+export class MoviesDetailPageModule { }
