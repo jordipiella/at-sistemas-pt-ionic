@@ -8,12 +8,14 @@ import { httpLoaderFactory } from 'src/app/shared/utils/http-loader.factory';
 import { HttpClient } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
 import { SwitchLanguageComponent } from './switch-language/switch-language.component';
+import { LoadingComponent } from './loading/loading.component';
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    SwitchLanguageComponent
+    SwitchLanguageComponent,
+    LoadingComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +30,8 @@ import { SwitchLanguageComponent } from './switch-language/switch-language.compo
     }),
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    LoadingComponent
   ]
 })
 export class CoreModule { }
