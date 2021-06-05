@@ -13,9 +13,7 @@ import { CardModule } from 'src/app/shared/modules/card/card.module';
 
 
 @NgModule({
-  declarations: [
-    MoviesPage
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     MoviesRoutingModule,

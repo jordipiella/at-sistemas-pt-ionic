@@ -1,18 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { MoviesPage } from './movies.page';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo:'list'
-  },
-  {
-    path: 'list',
-    loadChildren: () => import('./pages/movies-page.module').then( m => m.MoviesPageModule)
-  },
-  {
-    path: '**',
-    redirectTo: 'list'
+    component: MoviesPage
   }
 ];
 
@@ -20,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class MoviesRoutingModule { }
+export class MoviesPageRoutingModule { }
