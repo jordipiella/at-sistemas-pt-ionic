@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiMoviesUrl: 'http://localhost:3000'
+  apiMoviesUrl: 'http://localhost:3000',
+  localePath: '/assets/i18n/'
 };
 
 /*

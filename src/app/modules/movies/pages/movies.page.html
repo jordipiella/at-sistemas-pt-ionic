@@ -4,6 +4,9 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>{{ movies }}</ion-title>
+    <ion-button slot="end" (click)="true">
+        {{'es'}}
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -13,6 +16,5 @@
       <ion-title size="large">{{ movies }}</ion-title>
     </ion-toolbar>
   </ion-header>
-
-
+  {{ 'movies.title' | translate }}
 </ion-content>
