@@ -14,6 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class MoviesDetailPage implements OnInit, OnDestroy {
 
+  title: string;
   movieId: number;
   movie: MovieModel;
   loading: boolean = false;
@@ -70,6 +71,10 @@ export class MoviesDetailPage implements OnInit, OnDestroy {
 
   setLoading(value: boolean) {
     this.loading = value;
+  }
+
+  goBack(): void {
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
 }

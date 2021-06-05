@@ -7,11 +7,13 @@ import { HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { httpLoaderFactory } from '../../../../shared/utils/http-loader.factory';
 import { CoreModule } from '../../../../core/core.module';
+import { MoviesDetailViewComponent } from './components/movies-detail-view/movies-detail-view.component';
 
 
 @NgModule({
   declarations: [
-    MoviesDetailPage
+    MoviesDetailPage,
+    MoviesDetailViewComponent
   ],
   imports: [
     CommonModule,

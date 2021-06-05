@@ -1,5 +1,12 @@
 {
   "movies": {
-    "title": "Películas"
+    "title": "Películas",
+    "details": {
+      "score": "Puntuación",
+      "genre": "Géneros",
+      "year": "Año",
+      "actors": "Actores",
+      "duration": "Duración"
+    }
   }
 }
