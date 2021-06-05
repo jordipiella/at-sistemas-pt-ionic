@@ -10,3 +10,6 @@ export * from './services/api-movies/contracts/movie.contract';
 
 // Enums
 export * from './enums/genre.enum';
+
+// Contracts
+export * from './services/api-movies/mocks/movie-mock.contract';
