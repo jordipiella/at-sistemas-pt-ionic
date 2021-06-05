@@ -9,6 +9,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { httpLoaderFactory } from 'src/app/shared/utils/http-loader.factory';
 import { HttpClient } from '@angular/common/http';
 import { CoreModule } from 'src/app/core/core.module';
+import { CardModule } from 'src/app/shared/modules/card/card.module';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { CoreModule } from 'src/app/core/core.module';
     IonicModule,
     ApiModule,
     CoreModule,
+    CardModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,
