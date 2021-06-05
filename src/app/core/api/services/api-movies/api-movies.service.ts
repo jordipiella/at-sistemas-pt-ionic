@@ -5,8 +5,11 @@ import { environment } from 'src/environments/environment';
 import { MovieContract } from './contracts/movie.contract';
 import { HttpClient } from '@angular/common/http';
 import { API_URL_MOVIES } from '../../constants/api-url.constants';
+import { ApiModule } from '../../api.module';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class ApiMoviesService {
 
   constructor(

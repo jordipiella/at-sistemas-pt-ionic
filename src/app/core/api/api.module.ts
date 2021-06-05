@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ApiMoviesService } from './services/api-movies/api-movies.service';
 
 
 
@@ -10,7 +9,6 @@ import { ApiMoviesService } from './services/api-movies/api-movies.service';
     CommonModule
   ],
   providers: [
-    ApiMoviesService
   ]
 })
 export class ApiModule { }

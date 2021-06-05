@@ -15,6 +15,8 @@ import { FolderPage } from './folder.page';
     IonicModule,
     FolderPageRoutingModule
   ],
-  declarations: [FolderPage]
+  declarations: [FolderPage],
+  providers: [
+  ]
 })
 export class FolderPageModule {}
