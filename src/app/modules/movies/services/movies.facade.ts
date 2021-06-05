@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MoviesService } from './movies/movies.service';
 import { MovieModel } from './movies/models/movie.model';
+import { IPagination } from '../../../core/api/interfaces/pagination.interface';
+import { IApiResponse } from '../../../core/api/interfaces/response.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +14,8 @@ export class MoviesFacade {
     private moviesService: MoviesService
   ) { }
 
-  getAllMovies(): Observable<MovieModel[]> {
-    return this.moviesService.getAll();
+  getAllMovies(queryParams?: IPagination): Observable<IApiResponse<MovieModel[]>> {
+    return this.moviesService.getAll(queryParams);
   }
 
   getMovie(movieId: number): Observable<MovieModel> {
