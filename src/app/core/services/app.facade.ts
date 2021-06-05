@@ -14,4 +14,16 @@ export class AppFacade {
     return this.languageService.setDefaultLanguage();
   }
 
+  setLanguage(language: string): void {
+    return this.languageService.setLanguage(language);
+  }
+
+  get languages(): string[] {
+    return this.languageService.languages;
+  }
+
+  get currentLang(): string {
+    return this.languageService.currentLang;
+  }
+
 }

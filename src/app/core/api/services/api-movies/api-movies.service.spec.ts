@@ -3,7 +3,7 @@ import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@an
 import { ApiMoviesService } from './api-movies.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { environment } from '../../../../../environments/environment';
-import { API_URL_MOVIES } from '../../constants/api-url.constants';
+import { API_URL_MOVIES } from '../../../services/language/constants/api-url.constants';
 import { MovieContract } from './contracts/movie.contract';
 import { movieMockContract } from './mocks/movie-mock.contract';
 

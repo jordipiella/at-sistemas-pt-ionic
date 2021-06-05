@@ -1,26 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MoviesRoutingModule } from './movies-routing.module';
 import { IonicModule } from '@ionic/angular';
-import { MoviesPage } from './pages/movies.page';
 import { ApiModule } from '@api';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { httpLoaderFactory } from 'src/app/shared/utils/http-loader.factory';
 import { HttpClient } from '@angular/common/http';
-import { CoreModule } from 'src/app/core/core.module';
+import { HeaderComponent } from './header/header.component';
+import { SwitchLanguageComponent } from './switch-language/switch-language.component';
 
 
 @NgModule({
   declarations: [
-    MoviesPage
+    HeaderComponent,
+    SwitchLanguageComponent
   ],
   imports: [
     CommonModule,
-    MoviesRoutingModule,
     IonicModule,
     ApiModule,
-    CoreModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,
@@ -29,7 +27,8 @@ import { CoreModule } from 'src/app/core/core.module';
       }
     }),
   ],
-  providers: [
+  exports: [
+    HeaderComponent
   ]
 })
-export class MoviesModule { }
+export class CoreModule { }
