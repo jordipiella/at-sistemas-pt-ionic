@@ -5,15 +5,13 @@
 
   <ion-virtual-scroll [items]="movies" approxItemHeight="401px">
     <ng-container *virtualItem="let movie">
-      <app-card>
+      <app-card (click)="goToDetailPage(movie)">
         <ng-template #header>
           <div class="poster" [style.background-image]="'url(' + movie.poster + ')'"></div>
           <ion-card-title>{{ movie.title }}</ion-card-title>
         </ng-template>
         <ng-template #content>
-          <ion-badge *ngFor="let badge of movie?.genre" color="primary">
-            #{{ badge }}
-          </ion-badge>
+          <app-badge [badges]="movie?.genre"></app-badge>
         </ng-template>
       </app-card>
     </ng-container>

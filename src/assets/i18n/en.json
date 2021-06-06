@@ -1,5 +1,13 @@
 {
   "movies": {
-    "title": "Movies"
+    "title": "Movies",
+    "details": {
+      "score": "Score",
+      "genre": "Genre",
+      "year": "Year",
+      "actors": "Actors",
+      "duration": "Duration",
+      "studio": "Studio"
+    }
   }
 }
