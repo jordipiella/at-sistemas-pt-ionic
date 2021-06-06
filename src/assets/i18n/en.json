@@ -6,7 +6,8 @@
       "genre": "Genre",
       "year": "Year",
       "actors": "Actors",
-      "duration": "Duration"
+      "duration": "Duration",
+      "studio": "Studio"
     }
   }
 }

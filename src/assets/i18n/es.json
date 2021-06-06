@@ -6,7 +6,8 @@
       "genre": "Géneros",
       "year": "Año",
       "actors": "Actores",
-      "duration": "Duración"
+      "duration": "Duración",
+      "studio": "Estudio"
     }
   }
 }

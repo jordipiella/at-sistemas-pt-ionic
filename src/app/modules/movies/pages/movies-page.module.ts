@@ -8,6 +8,7 @@ import { CardModule } from 'src/app/shared/modules/card/card.module';
 import { HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { httpLoaderFactory } from '../../../shared/utils/http-loader.factory';
+import { BadgeModule } from '../../../shared/modules/badge/badge.module';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { httpLoaderFactory } from '../../../shared/utils/http-loader.factory';
     MoviesPageRoutingModule,
     CoreModule,
     CardModule,
+    BadgeModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,

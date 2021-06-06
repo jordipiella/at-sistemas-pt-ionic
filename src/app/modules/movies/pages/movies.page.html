@@ -11,9 +11,7 @@
           <ion-card-title>{{ movie.title }}</ion-card-title>
         </ng-template>
         <ng-template #content>
-          <ion-badge *ngFor="let badge of movie?.genre" color="primary">
-            #{{ badge }}
-          </ion-badge>
+          <app-badge [badges]="movie?.genre"></app-badge>
         </ng-template>
       </app-card>
     </ng-container>

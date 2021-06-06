@@ -8,6 +8,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { httpLoaderFactory } from '../../../../shared/utils/http-loader.factory';
 import { CoreModule } from '../../../../core/core.module';
 import { MoviesDetailViewComponent } from './components/movies-detail-view/movies-detail-view.component';
+import { BadgeModule } from '../../../../shared/modules/badge/badge.module';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { MoviesDetailViewComponent } from './components/movies-detail-view/movie
     IonicModule,
     MoviesDetailPageRoutingModule,
     CoreModule,
+    BadgeModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,
