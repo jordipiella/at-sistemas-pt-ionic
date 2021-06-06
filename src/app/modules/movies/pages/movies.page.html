@@ -22,4 +22,9 @@
       <app-loading [loading]="movies?.length && loading"></app-loading>
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="goToAddMovie()" color="success">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

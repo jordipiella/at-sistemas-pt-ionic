@@ -11,6 +11,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/movies-page.module').then( m => m.MoviesPageModule)
   },
   {
+    path: 'new',
+    loadChildren: () => import('./pages/movies-edit/movies-edit-page.module').then( m => m.MoviesEditPageModule)
+  },
+  {
     path: 'edit/:movieId',
     loadChildren: () => import('./pages/movies-edit/movies-edit-page.module').then( m => m.MoviesEditPageModule)
   },

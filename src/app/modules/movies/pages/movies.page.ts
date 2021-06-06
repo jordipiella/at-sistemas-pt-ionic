@@ -88,4 +88,8 @@ export class MoviesPage implements OnInit, OnDestroy {
     this.router.navigate([`movies/${ movie.id }`])
   }
 
+  goToAddMovie(): void {
+    this.router.navigate(['movies/new']);
+  }
+
 }
