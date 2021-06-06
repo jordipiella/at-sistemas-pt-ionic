@@ -8,7 +8,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { httpLoaderFactory } from '../../../../shared/utils/http-loader.factory';
 import { CoreModule } from '../../../../core/core.module';
 import { MoviesDetailViewComponent } from './components/movies-detail-view/movies-detail-view.component';
-import { BadgeModule } from '../../../../shared/modules/badge/badge.module';
+import { CustomFormsModule } from '../../../../shared/modules/custom-forms/custom-forms.module';
 
 
 @NgModule({
@@ -21,7 +21,7 @@ import { BadgeModule } from '../../../../shared/modules/badge/badge.module';
     IonicModule,
     MoviesDetailPageRoutingModule,
     CoreModule,
-    BadgeModule,
+    CustomFormsModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,

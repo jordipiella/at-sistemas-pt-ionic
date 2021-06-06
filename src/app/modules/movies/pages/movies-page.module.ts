@@ -8,7 +8,7 @@ import { CardModule } from 'src/app/shared/modules/card/card.module';
 import { HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { httpLoaderFactory } from '../../../shared/utils/http-loader.factory';
-import { BadgeModule } from '../../../shared/modules/badge/badge.module';
+import { CustomFormsModule } from '../../../shared/modules/custom-forms/custom-forms.module';
 
 
 @NgModule({
@@ -21,7 +21,7 @@ import { BadgeModule } from '../../../shared/modules/badge/badge.module';
     MoviesPageRoutingModule,
     CoreModule,
     CardModule,
-    BadgeModule,
+    CustomFormsModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,
