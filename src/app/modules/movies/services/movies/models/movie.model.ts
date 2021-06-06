@@ -8,5 +8,6 @@ export class MovieModel {
   year: number;
   duration: number;
   imdbRating: number;
+  studio: string;
   actors: number[];
 }
