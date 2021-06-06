@@ -1,0 +1,9 @@
+
+ <div
+  *ngIf="control?.invalid && (control.dirty || control.touched)"
+  class="text-red-500 text-xs p-2"
+>
+  <div *ngIf="control?.errors[error]">
+    {{ message }}
+  </div>
+</div>

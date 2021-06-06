@@ -8,13 +8,15 @@ import { FormsMultiSelectBadgeComponent } from './components/forms-multiselect-b
 import { HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { httpLoaderFactory } from '../../utils/http-loader.factory';
+import { FormErrorComponent } from './components/forms-error/form-error.component';
 
 
 @NgModule({
   declarations: [
     BadgeComponent,
     FormsAddBadgeComponent,
-    FormsMultiSelectBadgeComponent
+    FormsMultiSelectBadgeComponent,
+    FormErrorComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +33,8 @@ import { httpLoaderFactory } from '../../utils/http-loader.factory';
   exports: [
     BadgeComponent,
     FormsAddBadgeComponent,
-    FormsMultiSelectBadgeComponent
+    FormsMultiSelectBadgeComponent,
+    FormErrorComponent
   ]
 })
 export class CustomFormsModule { }

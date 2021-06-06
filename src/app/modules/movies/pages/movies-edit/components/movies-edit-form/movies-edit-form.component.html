@@ -13,13 +13,7 @@
           [placeholder]="'movies.details.title' | translate"
           class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-gray-700"
         >
-        <div
-            *ngIf="movieForm.get('title').invalid && (movieForm.get('title').dirty || movieForm.get('title').touched)"
-            class="text-red-500 text-xs p-2">
-          <div *ngIf="movieForm.get('title').errors?.required">
-            {{ 'validations.required' | translate: { value: 'movies.details.title' | translate } }}
-          </div>
-        </div>
+        <app-form-error [control]="movieForm.get('title')" message="{{ 'validations.required' | translate: { value: 'movies.details.title' | translate } }}" error="required"></app-form-error>
       </div>
 
       <div class="mb-4">
