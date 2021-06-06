@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MovieModel } from '../../../../services/movies/models/movie.model';
 import { MoviesFacade } from '../../../../services/movies.facade';
 import { tap } from 'rxjs/operators';
@@ -29,8 +29,8 @@ export class MoviesEditFormComponent implements OnInit {
     const form: FormGroup = this.fb.group({
       title: ['', [Validators.required]],
       poster: [''],
-      genre: [''],
-      actors: [''],
+      genre: [[]],
+      actors: [[]],
       studio: [''],
       year: [''],
       duration: [''],
@@ -43,7 +43,7 @@ export class MoviesEditFormComponent implements OnInit {
     this.movieForm.markAllAsTouched();
 
     if (this.movieForm.invalid) {
-      console.log('invaild');
+      console.error('invaild');
       return;
     }
     const movie: MovieModel = this.movieForm.getRawValue();
@@ -53,7 +53,6 @@ export class MoviesEditFormComponent implements OnInit {
   create(movie: MovieModel): void {
     this.moviesFacade.createMovie(movie)
       .pipe(
-        tap(x => console.log(x))
       )
       .subscribe();
   }

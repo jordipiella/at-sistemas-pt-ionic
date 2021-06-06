@@ -9,6 +9,7 @@ import { httpLoaderFactory } from '../../../../shared/utils/http-loader.factory'
 import { CoreModule } from '../../../../core/core.module';
 import { MoviesEditFormComponent } from './components/movies-edit-form/movies-edit-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CustomFormsModule } from '../../../../shared/modules/custom-forms/custom-forms.module';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MoviesEditPageRoutingModule,
     CoreModule,
     ReactiveFormsModule,
+    CustomFormsModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,

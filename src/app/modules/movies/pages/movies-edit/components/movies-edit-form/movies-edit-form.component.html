@@ -41,23 +41,8 @@
           >
         </div>
       </div>
+      <app-forms-add-badge formControlName="genre"></app-forms-add-badge>
 
-
-      <label for="genre" class="block text-sm font-medium text-gray-700">
-        {{ 'movies.details.genre' | translate }}
-      </label>
-      <div class="mt-1 flex rounded-md shadow-sm">
-        <input
-          formControlName="genre"
-          type="text"
-          name="genre"
-          id="genre"
-          class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border-gray-300 text-gray-700"
-        >
-        <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
-          +
-        </span>
-      </div>
 
       <label for="actors" class="block text-sm font-medium text-gray-700">{{ 'movies.details.actors' | translate}}</label>
       <select
