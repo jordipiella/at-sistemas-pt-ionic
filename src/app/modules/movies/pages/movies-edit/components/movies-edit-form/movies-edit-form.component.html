@@ -28,13 +28,16 @@
           </span>
           <input
             formControlName="poster"
-            type="text"
+            type="url"
             name="poster"
             id="poster"
             class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 text-gray-700"
             placeholder=""
           >
         </div>
+        <app-form-error [control]="movieForm.get('poster')" message="{{ 'validations.required' | translate: { value: 'movies.details.title' | translate } }}" error="required"></app-form-error>
+        <app-form-error [control]="movieForm.get('poster')" message="pattern" error="pattern"></app-form-error>
+
       </div>
 
       <div class="mb-4">
@@ -42,12 +45,15 @@
           {{ 'movies.details.genre' | translate }}
         </label>
         <app-forms-add-badge formControlName="genre"></app-forms-add-badge>
+        <app-form-error [control]="movieForm.get('genre')" message="{{ 'validations.required' | translate: { value: 'movies.details.genre' | translate } }}" error="required"></app-form-error>
       </div>
+
       <div class="mb-4">
         <label for="actors" class="block text-sm font-medium text-gray-700">
           {{ 'movies.details.actors' | translate }}
         </label>
         <app-forms-multiselect-badge formControlName="actors" [options]="actors" label="first_name"></app-forms-multiselect-badge>
+        <app-form-error [control]="movieForm.get('actors')" message="{{ 'validations.required' | translate: { value: 'movies.details.actors' | translate } }}" error="required"></app-form-error>
       </div>
 
 
@@ -74,6 +80,11 @@
           id="title"
           class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-gray-700"
         >
+        <app-form-error [control]="movieForm.get('year')" message="{{ 'validations.required' | translate: { value: 'movies.details.year' | translate } }}" error="required"></app-form-error>
+        <app-form-error [control]="movieForm.get('year')" message="'minLength'" error="minLength"></app-form-error>
+        <app-form-error [control]="movieForm.get('year')" message="'maxLength'" error="maxLength"></app-form-error>
+        <app-form-error [control]="movieForm.get('year')" message="'min'" error="min"></app-form-error>
+        <app-form-error [control]="movieForm.get('year')" message="'max'" error="max"></app-form-error>
       </div>
 
       <div class="mb-4">
@@ -85,6 +96,8 @@
           id="duration"
           class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-gray-700"
         >
+        <app-form-error [control]="movieForm.get('duration')" message="{{ 'validations.required' | translate: { value: 'movies.details.duration' | translate } }}" error="required"></app-form-error>
+        <app-form-error [control]="movieForm.get('duration')" message="'pattern'" error="pattern"></app-form-error>
       </div>
 
       <div class="mb-4">
@@ -96,6 +109,9 @@
           id="imdbRating"
           class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-gray-700" placeholder="0.00"
         >
+        <app-form-error [control]="movieForm.get('imdbRating')" message="{{ 'validations.required' | translate: { value: 'movies.details.score' | translate } }}" error="required"></app-form-error>
+        <app-form-error [control]="movieForm.get('imdbRating')" message="'min'" error="min"></app-form-error>
+        <app-form-error [control]="movieForm.get('imdbRating')" message="'max'" error="max"></app-form-error>
       </div>
       <div class="mt-8 text-right">
         <button

@@ -33,28 +33,43 @@ export class MoviesEditFormComponent implements OnInit {
       ],
       poster: [
         (movie?.poster) ? movie.poster : '',
-        [ Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]
+        [ Validators.required, Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]
       ],
       genre: [
-        (movie?.genre?.length) ? movie.genre : []
+        (movie?.genre?.length) ? movie.genre : [],
+        Validators.required
       ],
       actors: [
-        (movie?.actors?.length) ? movie.actors : []
+        (movie?.actors?.length) ? movie.actors : [],
+        Validators.required
       ],
       studio: [
         (movie?.studio) ? movie.studio : null
       ],
       year: [
         (movie?.year) ? movie.year : 1900,
-        [ Validators.required, Validators.minLength(4), Validators.maxLength(4) ]
+        [
+          Validators.required,
+          Validators.minLength(4),
+          Validators.maxLength(4),
+          Validators.min(1000),
+          Validators.max(9999)
+        ]
       ],
       duration: [
         (movie?.duration) ? movie.duration : 0,
-        [ Validators.required, Validators.pattern("^[0-9]*$") ]
+        [
+          Validators.required,
+          Validators.pattern("^[0-9]*$")
+        ]
       ],
       imdbRating: [
         (movie?.imdbRating) ? movie.imdbRating : null,
-        [ Validators.required ]
+        [
+          Validators.required,
+          Validators.min(0),
+          Validators.max(10)
+        ]
       ]
     });
     return form;
