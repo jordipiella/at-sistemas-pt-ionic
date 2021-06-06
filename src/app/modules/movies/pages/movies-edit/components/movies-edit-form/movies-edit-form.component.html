@@ -1,19 +1,45 @@
 
 <div class="w-full bg-white h-full px-8 pt-6 pb-8 flex justify-center">
   <div class="w-full lg:w-4/6">
-    <form action="#" method="POST">
-      <label for="title" class="block text-sm font-medium text-gray-700">{{ 'movies.details.title' | translate }}</label>
-      <input type="text" name="title" id="title" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-gray-700">
+    <form *ngIf="movieForm" [formGroup]="movieForm">
+      <div class="mb-4">
+        <label for="title" class="block text-sm font-medium text-gray-700">{{ 'movies.details.title' | translate }}</label>
+        <input
+          #title
+          formControlName="title"
+          type="text"
+          name="title"
+          id="title"
+          class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-gray-700"
+        >
+        <div
+            *ngIf="movieForm.get('title').invalid && (movieForm.get('title').dirty || movieForm.get('title').touched)"
+            class="text-red-500 text-xs p-2">
+          <div *ngIf="movieForm.get('title').errors?.required">
+            {{ 'validations.required' | translate: { value: 'movies.details.title' | translate } }}
+          </div>
 
 
-      <label for="poster" class="block text-sm font-medium text-gray-700">
-        {{ 'movies.details.poster' | translate }}
-      </label>
-      <div class="mt-1 flex rounded-md shadow-sm">
-        <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
-          http://
-        </span>
-        <input type="text" name="poster" id="poster" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 text-gray-700" placeholder="">
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label for="poster" class="block text-sm font-medium text-gray-700">
+          {{ 'movies.details.poster' | translate }}
+        </label>
+        <div class="mt-1 flex rounded-md shadow-sm">
+          <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
+            http://
+          </span>
+          <input
+            formControlName="poster"
+            type="text"
+            name="poster"
+            id="poster"
+            class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 text-gray-700"
+            placeholder=""
+          >
+        </div>
       </div>
 
 
@@ -21,37 +47,77 @@
         {{ 'movies.details.genre' | translate }}
       </label>
       <div class="mt-1 flex rounded-md shadow-sm">
-        <input type="text" name="genre" id="genre" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border-gray-300 text-gray-700">
+        <input
+          formControlName="genre"
+          type="text"
+          name="genre"
+          id="genre"
+          class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border-gray-300 text-gray-700"
+        >
         <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
           +
         </span>
       </div>
 
       <label for="actors" class="block text-sm font-medium text-gray-700">{{ 'movies.details.actors' | translate}}</label>
-      <select id="actors" name="actors" autocomplete="actors" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-700">
-        <option></option>
-        <option></option>
-        <option></option>
+      <select
+        formControlName="actors"
+        id="actors"
+        name="actors"
+        autocomplete="actors"
+        class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-700"
+      >
+        <option value="1">Isaak McQuode</option>
+        <option value="2">Rory Chanders</option>
+        <option value="3">Lew Meehan</option>
       </select>
 
       <label for="studio" class="block text-sm font-medium text-gray-700">{{ 'movies.details.studio' | translate}}</label>
-      <select id="studio" name="studio" autocomplete="studio" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-700">
-        <option></option>
-        <option></option>
-        <option></option>
+      <select
+        formControlName="studio"
+
+        id="studio"
+        name="studio"
+        autocomplete="studio"
+        class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-700"
+      >
+        <option value="Columbia Pictures">Columbia Pictures</option>
+        <option value="20th Century Fox/20th Century Studios">20th Century Fox/20th Century Studios</option>
+        <option value="Metro-Goldwyn-Mayer (MGM)">Metro-Goldwyn-Mayer (MGM)</option>
       </select>
 
       <label for="year" class="block text-sm font-medium text-gray-700">{{ 'movies.details.year' | translate }}</label>
-      <input type="number" name="year" id="title" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-gray-700">
+      <input
+        formControlName="year"
+        type="number"
+        name="year"
+        id="title"
+        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-gray-700"
+      >
 
       <label for="duration" class="block text-sm font-medium text-gray-700">{{ 'movies.details.duration' | translate}}</label>
-      <input type="number" name="duration" id="duration" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-gray-700">
+      <input
+        formControlName="duration"
+        type="number"
+        name="duration"
+        id="duration"
+        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-gray-700"
+      >
 
       <label for="score" class="block text-sm font-medium text-gray-700">{{ 'movies.details.score' | translate}}</label>
-      <input type="number" name="score" id="score" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-gray-700" placeholder="0.00">
+      <input
+        formControlName="score"
+        type="number"
+        name="score"
+        id="score"
+        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-gray-700" placeholder="0.00"
+      >
 
 
-      <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+      <button
+        (click)="submit()"
+        class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+      >
         Save
       </button>
     </form>

@@ -10,6 +10,13 @@
       "studio": "Estudio",
       "title": "Título",
       "poster": "Poster"
+    },
+    "edit": {
+      "new": "Nueva película",
+      "edit": "Editar película"
     }
+  },
+  "validations": {
+    "required": "{{ value }} es un campo requerido"
   }
 }

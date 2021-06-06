@@ -10,6 +10,13 @@
       "studio": "Studio",
       "title": "Ttile",
       "poster": "Poster"
+    },
+    "edit": {
+      "new": "New movie",
+      "edit": "Edit movie"
     }
+  },
+  "validations": {
+    "required": "The {{ value }} field is required."
   }
 }

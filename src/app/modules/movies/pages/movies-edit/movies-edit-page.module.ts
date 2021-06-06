@@ -8,6 +8,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { httpLoaderFactory } from '../../../../shared/utils/http-loader.factory';
 import { CoreModule } from '../../../../core/core.module';
 import { MoviesEditFormComponent } from './components/movies-edit-form/movies-edit-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { MoviesEditFormComponent } from './components/movies-edit-form/movies-ed
     IonicModule,
     MoviesEditPageRoutingModule,
     CoreModule,
+    ReactiveFormsModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,
