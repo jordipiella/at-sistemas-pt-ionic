@@ -1,5 +1,6 @@
-<app-header [title]="movie?.title"></app-header>
+<app-header [title]="'movies.edit.new' | translate"></app-header>
 
 <ion-content [fullscreen]="true">
   <app-loading *ngIf="!movie" [loading]="loading"></app-loading>
+  <app-movies-edit-form></app-movies-edit-form>
 </ion-content>

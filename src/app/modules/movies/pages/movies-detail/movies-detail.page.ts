@@ -77,4 +77,9 @@ export class MoviesDetailPage implements OnInit, OnDestroy {
     this.router.navigate(['../'], { relativeTo: this.route });
   }
 
+  goToEdit(movieId: number): void {
+    console.log('clic', movieId)
+    this.router.navigate([`../edit/${ movieId }`], { relativeTo: this.route });
+  }
+
 }

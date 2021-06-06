@@ -12,17 +12,11 @@
     </ion-back-button>
   </ion-fab>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-back-button
-      defaultHref="movies"
-      icon="trash"
-      text=""
-      color="secondary">
-    </ion-back-button>
-    <ion-back-button
-      defaultHref="movies"
-      icon="create"
-      text=""
-      color="secondary">
-    </ion-back-button>
+    <ion-fab-button (click)="goToEdit(movie?.id)">
+      <ion-icon name="trash"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button (click)="goToEdit(movie?.id)">
+      <ion-icon name="create"></ion-icon>
+    </ion-fab-button>
   </ion-fab>
 </ion-content>

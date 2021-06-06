@@ -7,7 +7,9 @@
       "year": "Year",
       "actors": "Actors",
       "duration": "Duration",
-      "studio": "Studio"
+      "studio": "Studio",
+      "title": "Ttile",
+      "poster": "Poster"
     }
   }
 }
