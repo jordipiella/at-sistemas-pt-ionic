@@ -31,6 +31,10 @@ import { CustomFormsModule } from '../../../../shared/modules/custom-forms/custo
         deps: [HttpClient]
       }
     }),
+  ],
+  exports: [
+    MoviesEditPage,
+    MoviesEditFormComponent
   ]
 })
 export class MoviesEditPageModule { }

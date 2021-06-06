@@ -59,7 +59,7 @@
           autocomplete="actors"
           class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-700"
         >
-          <option selected>{{ 'movies.edit.select' | translate }}</option>
+          <option [value]="null" selected>{{ 'movies.edit.select' | translate }}</option>
           <option value="1">Isaak McQuode</option>
           <option value="2">Rory Chanders</option>
           <option value="3">Lew Meehan</option>
@@ -75,10 +75,8 @@
           autocomplete="studio"
           class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-700"
         >
-          <option selected>{{ 'movies.edit.select' | translate }}</option>
-          <option value="Columbia Pictures">Columbia Pictures</option>
-          <option value="20th Century Fox/20th Century Studios">20th Century Fox/20th Century Studios</option>
-          <option value="Metro-Goldwyn-Mayer (MGM)">Metro-Goldwyn-Mayer (MGM)</option>
+          <option [value]="null" selected>{{ 'movies.edit.select' | translate }}</option>
+          <option *ngFor="let studio of studios" [value]="studio">{{ studio }}</option>
         </select>
       </div>
 
@@ -105,12 +103,12 @@
       </div>
 
       <div class="mb-4">
-        <label for="score" class="block text-sm font-medium text-gray-700">{{ 'movies.details.score' | translate}}</label>
+        <label for="imdbRating" class="block text-sm font-medium text-gray-700">{{ 'movies.details.score' | translate}}</label>
         <input
-          formControlName="score"
+          formControlName="imdbRating"
           type="number"
-          name="score"
-          id="score"
+          name="imdbRating"
+          id="imdbRating"
           class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-gray-700" placeholder="0.00"
         >
       </div>

@@ -11,27 +11,50 @@ import { MovieModel } from '../../../../services/movies/models/movie.model';
 export class MoviesEditFormComponent implements OnInit {
 
   @Input() movie: MovieModel;
+  @Input() studios: string[] = [];
   @Output() submitForm: EventEmitter<MovieModel> = new EventEmitter<MovieModel>();
   movieForm: FormGroup;
+  movieId: string;
 
   constructor(
     private fb: FormBuilder,
   ) { }
 
   ngOnInit(): void {
-    this.movieForm = this.buildMovieForm();
+    this.movieForm = this.buildMovieForm(this.movie);
   }
 
-  buildMovieForm(): FormGroup {
+  buildMovieForm(movie?: MovieModel): FormGroup {
     const form: FormGroup = this.fb.group({
-      title: ['', [Validators.required]],
-      poster: ['', [Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]],
-      genre: [[]],
-      actors: [[]],
-      studio: [''],
-      year: [1900, [Validators.required, Validators.minLength(4), Validators.maxLength(4)]],
-      duration: [0, [Validators.required, Validators.pattern("^[0-9]*$")]],
-      score: [null, [Validators.required]]
+      title: [
+        (movie?.title) ? movie.title : '',
+        [ Validators.required ]
+      ],
+      poster: [
+        (movie?.poster) ? movie.poster : '',
+        [ Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]
+      ],
+      genre: [
+        (movie?.genre?.length) ? movie.genre : []
+      ],
+      actors: [
+        (movie?.actors?.length) ? movie.actors : []
+      ],
+      studio: [
+        (movie?.studio) ? movie.studio : ''
+      ],
+      year: [
+        (movie?.year) ? movie.year : 1900,
+        [ Validators.required, Validators.minLength(4), Validators.maxLength(4) ]
+      ],
+      duration: [
+        (movie?.duration) ? movie.duration : 0,
+        [ Validators.required, Validators.pattern("^[0-9]*$") ]
+      ],
+      imdbRating: [
+        (movie?.imdbRating) ? movie.imdbRating : null,
+        [ Validators.required ]
+      ]
     });
     return form;
   }
@@ -42,7 +65,8 @@ export class MoviesEditFormComponent implements OnInit {
       console.error('invaild');
       return;
     }
-    const movie: MovieModel = this.movieForm.getRawValue();
+    let movie: MovieModel = this.movieForm.getRawValue();
+    if (this.movieId) movie.id = parseInt(this.movieId);
     this.submitForm.emit(movie);
   }
 
