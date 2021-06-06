@@ -13,7 +13,10 @@
     },
     "edit": {
       "new": "New movie",
-      "edit": "Edit movie"
+      "edit": "Edit movie",
+      "save": "Guardar",
+      "imageUrl": "Url imagen",
+      "select": "Select"
     }
   },
   "validations": {

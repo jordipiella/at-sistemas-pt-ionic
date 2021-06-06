@@ -2,5 +2,5 @@
 
 <ion-content [fullscreen]="true">
   <app-loading *ngIf="!movie" [loading]="loading"></app-loading>
-  <app-movies-edit-form></app-movies-edit-form>
+  <app-movies-edit-form (submitForm)="create($event)"></app-movies-edit-form>
 </ion-content>

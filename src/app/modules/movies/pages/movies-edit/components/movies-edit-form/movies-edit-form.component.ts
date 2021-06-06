@@ -1,9 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MovieModel } from '../../../../services/movies/models/movie.model';
-import { MoviesFacade } from '../../../../services/movies.facade';
-import { tap } from 'rxjs/operators';
-
 
 
 @Component({
@@ -14,11 +11,11 @@ import { tap } from 'rxjs/operators';
 export class MoviesEditFormComponent implements OnInit {
 
   @Input() movie: MovieModel;
+  @Output() submitForm: EventEmitter<MovieModel> = new EventEmitter<MovieModel>();
   movieForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
-    private moviesFacade: MoviesFacade
   ) { }
 
   ngOnInit(): void {
@@ -28,33 +25,27 @@ export class MoviesEditFormComponent implements OnInit {
   buildMovieForm(): FormGroup {
     const form: FormGroup = this.fb.group({
       title: ['', [Validators.required]],
-      poster: [''],
+      poster: ['', [Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]],
       genre: [[]],
       actors: [[]],
       studio: [''],
-      year: [''],
-      duration: [''],
-      score: ['']
+      year: [1900, [Validators.required, Validators.minLength(4), Validators.maxLength(4)]],
+      duration: [0, [Validators.required, Validators.pattern("^[0-9]*$")]],
+      score: [null, [Validators.required]]
     });
     return form;
   }
 
   submit(): void {
     this.movieForm.markAllAsTouched();
-
     if (this.movieForm.invalid) {
       console.error('invaild');
       return;
     }
     const movie: MovieModel = this.movieForm.getRawValue();
-    this.create(movie);
+    this.submitForm.emit(movie);
   }
 
-  create(movie: MovieModel): void {
-    this.moviesFacade.createMovie(movie)
-      .pipe(
-      )
-      .subscribe();
-  }
+
 
 }

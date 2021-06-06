@@ -10,6 +10,7 @@
           type="text"
           name="title"
           id="title"
+          [placeholder]="'movies.details.title' | translate"
           class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-gray-700"
         >
         <div
@@ -18,8 +19,6 @@
           <div *ngIf="movieForm.get('title').errors?.required">
             {{ 'validations.required' | translate: { value: 'movies.details.title' | translate } }}
           </div>
-
-
         </div>
       </div>
 
@@ -29,7 +28,9 @@
         </label>
         <div class="mt-1 flex rounded-md shadow-sm">
           <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
-            http://
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+            </svg>
           </span>
           <input
             formControlName="poster"
@@ -41,70 +42,86 @@
           >
         </div>
       </div>
-      <app-forms-add-badge formControlName="genre"></app-forms-add-badge>
 
+      <div class="mb-4">
+        <label for="genre" class="block text-sm font-medium text-gray-700">
+          {{ 'movies.details.genre' | translate }}
+        </label>
+        <app-forms-add-badge formControlName="genre"></app-forms-add-badge>
+      </div>
 
-      <label for="actors" class="block text-sm font-medium text-gray-700">{{ 'movies.details.actors' | translate}}</label>
-      <select
-        formControlName="actors"
-        id="actors"
-        name="actors"
-        autocomplete="actors"
-        class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-700"
-      >
-        <option value="1">Isaak McQuode</option>
-        <option value="2">Rory Chanders</option>
-        <option value="3">Lew Meehan</option>
-      </select>
+      <div class="mb-4">
+        <label for="actors" class="block text-sm font-medium text-gray-700">{{ 'movies.details.actors' | translate}}</label>
+        <select
+          formControlName="actors"
+          id="actors"
+          name="actors"
+          autocomplete="actors"
+          class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-700"
+        >
+          <option selected>{{ 'movies.edit.select' | translate }}</option>
+          <option value="1">Isaak McQuode</option>
+          <option value="2">Rory Chanders</option>
+          <option value="3">Lew Meehan</option>
+        </select>
+      </div>
 
-      <label for="studio" class="block text-sm font-medium text-gray-700">{{ 'movies.details.studio' | translate}}</label>
-      <select
-        formControlName="studio"
+      <div class="mb-4">
+        <label for="studio" class="block text-sm font-medium text-gray-700">{{ 'movies.details.studio' | translate}}</label>
+        <select
+          formControlName="studio"
+          id="studio"
+          name="studio"
+          autocomplete="studio"
+          class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-700"
+        >
+          <option selected>{{ 'movies.edit.select' | translate }}</option>
+          <option value="Columbia Pictures">Columbia Pictures</option>
+          <option value="20th Century Fox/20th Century Studios">20th Century Fox/20th Century Studios</option>
+          <option value="Metro-Goldwyn-Mayer (MGM)">Metro-Goldwyn-Mayer (MGM)</option>
+        </select>
+      </div>
 
-        id="studio"
-        name="studio"
-        autocomplete="studio"
-        class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-700"
-      >
-        <option value="Columbia Pictures">Columbia Pictures</option>
-        <option value="20th Century Fox/20th Century Studios">20th Century Fox/20th Century Studios</option>
-        <option value="Metro-Goldwyn-Mayer (MGM)">Metro-Goldwyn-Mayer (MGM)</option>
-      </select>
+      <div class="mb-4">
+        <label for="year" class="block text-sm font-medium text-gray-700">{{ 'movies.details.year' | translate }}</label>
+        <input
+          formControlName="year"
+          type="number"
+          name="year"
+          id="title"
+          class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-gray-700"
+        >
+      </div>
 
-      <label for="year" class="block text-sm font-medium text-gray-700">{{ 'movies.details.year' | translate }}</label>
-      <input
-        formControlName="year"
-        type="number"
-        name="year"
-        id="title"
-        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-gray-700"
-      >
+      <div class="mb-4">
+        <label for="duration" class="block text-sm font-medium text-gray-700">{{ 'movies.details.duration' | translate}}</label>
+        <input
+          formControlName="duration"
+          type="number"
+          name="duration"
+          id="duration"
+          class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-gray-700"
+        >
+      </div>
 
-      <label for="duration" class="block text-sm font-medium text-gray-700">{{ 'movies.details.duration' | translate}}</label>
-      <input
-        formControlName="duration"
-        type="number"
-        name="duration"
-        id="duration"
-        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-gray-700"
-      >
-
-      <label for="score" class="block text-sm font-medium text-gray-700">{{ 'movies.details.score' | translate}}</label>
-      <input
-        formControlName="score"
-        type="number"
-        name="score"
-        id="score"
-        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-gray-700" placeholder="0.00"
-      >
-
-
-      <button
-        (click)="submit()"
-        class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-      >
-        Save
-      </button>
+      <div class="mb-4">
+        <label for="score" class="block text-sm font-medium text-gray-700">{{ 'movies.details.score' | translate}}</label>
+        <input
+          formControlName="score"
+          type="number"
+          name="score"
+          id="score"
+          class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-gray-700" placeholder="0.00"
+        >
+      </div>
+      <div class="mt-8 text-right">
+        <button
+          (click)="submit()"
+          class="inline-flex justify-center w-full py-4 px-6 border border-transparent shadow-sm text-md font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
+          {{ 'movies.edit.save' | translate }}
+        </button>
+      </div>
     </form>
   </div>
 </div>
