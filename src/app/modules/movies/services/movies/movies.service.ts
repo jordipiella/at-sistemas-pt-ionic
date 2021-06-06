@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { MovieModel } from './models/movie.model';
 import { ApiMoviesService, MovieContract, IPagination } from '@api';
 import { IApiResponse } from '../../../../core/api/interfaces/response.interface';
+import { MoviesTranslator } from './translate/movies.translator';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class MoviesService {
   get(movieId: number): Observable<MovieModel> {
     return this.apiMovies.get(movieId)
       .pipe(
-        map((movie: MovieContract) => movie)
+        map((movie: MovieContract) => MoviesTranslator.translateContractToModel(movie))
       );
   }
 

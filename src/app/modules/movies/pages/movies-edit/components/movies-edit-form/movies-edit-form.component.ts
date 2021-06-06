@@ -12,6 +12,7 @@ export class MoviesEditFormComponent implements OnInit {
 
   @Input() movie: MovieModel;
   @Input() studios: string[] = [];
+  @Input() actors: any[] = [];
   @Output() submitForm: EventEmitter<MovieModel> = new EventEmitter<MovieModel>();
   movieForm: FormGroup;
   movieId: string;
@@ -41,7 +42,7 @@ export class MoviesEditFormComponent implements OnInit {
         (movie?.actors?.length) ? movie.actors : []
       ],
       studio: [
-        (movie?.studio) ? movie.studio : ''
+        (movie?.studio) ? movie.studio : null
       ],
       year: [
         (movie?.year) ? movie.year : 1900,

@@ -24,7 +24,7 @@
     <div class="mt-4 text-gray-700">
         <h3 class="">{{ 'movies.details.actors' | translate }}</h3>
         <p *ngFor="let actor of movie?.actors" class="text-gray-400">
-          {{ actor }}
+          {{ actor.first_name }} {{ actor.last_name }}
         </p>
     </div>
     <div *ngIf="movie?.studio" class="mt-4 text-gray-700">

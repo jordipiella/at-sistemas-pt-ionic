@@ -3,22 +3,35 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsAddBadgeComponent } from './components/forms-add-badge/forms-add-badge.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { BadgeComponent } from './badge/badge.component';
+import { BadgeComponent } from './components/badge/badge.component';
+import { FormsMultiSelectBadgeComponent } from './components/forms-multiselect-badge/forms-multiselect-badge.component';
+import { HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { httpLoaderFactory } from '../../utils/http-loader.factory';
 
 
 @NgModule({
   declarations: [
     BadgeComponent,
-    FormsAddBadgeComponent
+    FormsAddBadgeComponent,
+    FormsMultiSelectBadgeComponent
   ],
   imports: [
     CommonModule,
     IonicModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   exports: [
     BadgeComponent,
-    FormsAddBadgeComponent
+    FormsAddBadgeComponent,
+    FormsMultiSelectBadgeComponent
   ]
 })
 export class CustomFormsModule { }

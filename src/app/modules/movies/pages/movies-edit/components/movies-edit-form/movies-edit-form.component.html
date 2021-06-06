@@ -49,22 +49,13 @@
         </label>
         <app-forms-add-badge formControlName="genre"></app-forms-add-badge>
       </div>
-
       <div class="mb-4">
-        <label for="actors" class="block text-sm font-medium text-gray-700">{{ 'movies.details.actors' | translate}}</label>
-        <select
-          formControlName="actors"
-          id="actors"
-          name="actors"
-          autocomplete="actors"
-          class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-700"
-        >
-          <option [value]="null" selected>{{ 'movies.edit.select' | translate }}</option>
-          <option value="1">Isaak McQuode</option>
-          <option value="2">Rory Chanders</option>
-          <option value="3">Lew Meehan</option>
-        </select>
+        <label for="actors" class="block text-sm font-medium text-gray-700">
+          {{ 'movies.details.actors' | translate }}
+        </label>
+        <app-forms-multiselect-badge formControlName="actors" [options]="actors" label="first_name"></app-forms-multiselect-badge>
       </div>
+
 
       <div class="mb-4">
         <label for="studio" class="block text-sm font-medium text-gray-700">{{ 'movies.details.studio' | translate}}</label>
