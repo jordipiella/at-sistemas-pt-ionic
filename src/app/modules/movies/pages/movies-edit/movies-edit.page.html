@@ -1,0 +1,5 @@
+<app-header [title]="movie?.title"></app-header>
+
+<ion-content [fullscreen]="true">
+  <app-loading *ngIf="!movie" [loading]="loading"></app-loading>
+</ion-content>
