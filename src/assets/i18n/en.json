@@ -21,5 +21,10 @@
   },
   "validations": {
     "required": "The {{ value }} field is required."
+  },
+  "toast": {
+    "deletedSuccess": "Success deleted",
+    "updatedSuccess": "Success updated",
+    "createdSuccess": "Success created"
   }
 }

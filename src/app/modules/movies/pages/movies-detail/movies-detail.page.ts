@@ -6,6 +6,7 @@ import { MovieModel } from '../../services/movies/models/movie.model';
 import { MoviesFacade } from '../../services/movies.facade';
 import { AppFacade } from '../../../../core/services/app.facade';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-movies-detail',
@@ -14,7 +15,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class MoviesDetailPage implements OnInit, OnDestroy {
 
-  title: string;
   movieId: number;
   movie: MovieModel;
   loading: boolean = false;
@@ -24,7 +24,8 @@ export class MoviesDetailPage implements OnInit, OnDestroy {
     private moviesFacade: MoviesFacade,
     public appFacade: AppFacade,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) { }
 
   ngOnInit(): void {
@@ -69,7 +70,7 @@ export class MoviesDetailPage implements OnInit, OnDestroy {
     this.subscriptions.push(loadingSubs);
   }
 
-  setLoading(value: boolean) {
+  setLoading(value: boolean): void {
     this.loading = value;
   }
 
@@ -84,6 +85,7 @@ export class MoviesDetailPage implements OnInit, OnDestroy {
   deleteMovie(movieId: number) {
     const deleteSub: Subscription = this.moviesFacade.deleteMovie(movieId)
       .pipe(
+        tap(() => this.appFacade.successToast(this.translate.instant('toast.deletedSuccess'))),
         tap(() => this.goBack())
       ).subscribe();
     this.subscriptions.push(deleteSub);
