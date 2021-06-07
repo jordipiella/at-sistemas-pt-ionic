@@ -9,6 +9,7 @@ import { httpLoaderFactory } from '../../../../shared/utils/http-loader.factory'
 import { CoreModule } from '../../../../core/core.module';
 import { MoviesDetailViewComponent } from './components/movies-detail-view/movies-detail-view.component';
 import { CustomFormsModule } from '../../../../shared/modules/custom-forms/custom-forms.module';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { CustomFormsModule } from '../../../../shared/modules/custom-forms/custo
     IonicModule,
     MoviesDetailPageRoutingModule,
     CoreModule,
+    FormsModule,
     CustomFormsModule,
     TranslateModule.forChild({
       loader: {

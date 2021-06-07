@@ -32,8 +32,17 @@ export class MoviesPage implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+  }
+
+  ionViewWillEnter(): void {
+    this.movies = [];
+    this.pagination = { _page: 1, _limit: 5 };
     this.loadingSubscription();
     this.getMovies(this.pagination);
+  }
+
+  ionViewDidLeave(): void {
+    this.subscriptions.forEach((subs: Subscription) => subs.unsubscribe);
   }
 
   ngOnDestroy(): void {
@@ -60,13 +69,13 @@ export class MoviesPage implements OnInit, OnDestroy {
     this.total = (total) ? total : null;
   }
 
+
   loadData(event: any): void {
-    this.pagination._page += 1;
-    this.getMovies(this.pagination);
-    event?.target?.complete();
-    if (this.movies.length == this.total) {
-      event.target.disabled = true;
+    if (this.movies.length < this.total) {
+      this.pagination._page += 1;
+      this.getMovies(this.pagination);
     }
+    event?.target?.complete();
   }
 
   loadingSubscription(): void {
@@ -85,7 +94,7 @@ export class MoviesPage implements OnInit, OnDestroy {
     if (!movie?.id) {
       return;
     }
-    this.router.navigate([`movies/${ movie.id }`])
+    this.router.navigate([`movies/${ movie.id }`]);
   }
 
   goToAddMovie(): void {

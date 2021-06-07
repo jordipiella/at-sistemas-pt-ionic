@@ -30,16 +30,18 @@ export class MoviesService {
   }
 
   create(movie: MovieModel): Observable<MovieModel> {
-    return this.apiMovies.create(movie)
+    const movieContract: MovieContract = MoviesTranslator.translateModelToContract(movie);
+    return this.apiMovies.create(movieContract)
       .pipe(
-        map((createdMovie: MovieContract) => createdMovie)
+        map((createdMovie: MovieContract) => MoviesTranslator.translateContractToModel(createdMovie))
       );
   }
 
   update(movie: MovieModel): Observable<MovieModel> {
-    return this.apiMovies.update(movie)
+    const movieContract: MovieContract = MoviesTranslator.translateModelToContract(movie);
+    return this.apiMovies.update(movieContract)
       .pipe(
-        map((updatedMovie: MovieContract) => updatedMovie)
+        map((updatedMovie: MovieContract) => MoviesTranslator.translateContractToModel(updatedMovie))
       );
   }
 

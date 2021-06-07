@@ -36,12 +36,10 @@ export class MoviesEditFormComponent implements OnInit {
         [ Validators.required, Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]
       ],
       genre: [
-        (movie?.genre?.length) ? movie.genre : [],
-        Validators.required
+        (movie?.genre?.length) ? movie.genre : []
       ],
       actors: [
-        (movie?.actors?.length) ? movie.actors : [],
-        Validators.required
+        (movie?.actors?.length) ? movie.actors : []
       ],
       studio: [
         (movie?.studio) ? movie.studio : null

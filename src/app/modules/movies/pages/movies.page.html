@@ -17,6 +17,8 @@
     </ng-container>
   </ion-virtual-scroll>
 
+  <div class="w-full text-center h-20"></div>
+
   <ion-infinite-scroll threshold="15%" (ionInfinite)="loadData($event)" position="bottom">
     <ion-infinite-scroll-content>
       <app-loading [loading]="movies?.length && loading"></app-loading>
