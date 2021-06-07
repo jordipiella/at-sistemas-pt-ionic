@@ -10,12 +10,14 @@ import { CoreModule } from '../../../../core/core.module';
 import { MoviesDetailViewComponent } from './components/movies-detail-view/movies-detail-view.component';
 import { CustomFormsModule } from '../../../../shared/modules/custom-forms/custom-forms.module';
 import { FormsModule } from '@angular/forms';
+import { MinToHPipe } from '../../../../shared/pipes/secToMin.pipe';
 
 
 @NgModule({
   declarations: [
     MoviesDetailPage,
-    MoviesDetailViewComponent
+    MoviesDetailViewComponent,
+    MinToHPipe
   ],
   imports: [
     CommonModule,

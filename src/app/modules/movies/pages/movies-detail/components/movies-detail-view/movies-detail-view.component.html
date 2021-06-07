@@ -16,7 +16,7 @@
         <div>
           <h2 class="text-sm text-right">{{ 'movies.details.duration' | translate }}</h2>
           <p class="text-gray-400 text-right">
-            {{ movie?.duration }}
+            {{ movie?.duration | minToH }}
           </p>
         </div>
       </div>
