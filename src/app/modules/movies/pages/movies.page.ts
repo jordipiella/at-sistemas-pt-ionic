@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { IonInfiniteScroll } from '@ionic/angular';
+import { AnimationController, IonInfiniteScroll } from '@ionic/angular';
 import { MovieModel } from '../services/movies/models/movie.model';
 import { MoviesFacade } from '../services/movies.facade';
 import { catchError, debounceTime, first, tap } from 'rxjs/operators';
@@ -9,15 +9,17 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { of, Subscription } from 'rxjs';
 import { AppFacade } from '../../../core/services/app.facade';
 import { Router } from '@angular/router';
+import { Animation } from '@ionic/core';
 
 @Component({
   selector: 'app-movies',
   templateUrl: './movies.page.html',
-  styleUrls: ['./movies.page.scss'],
+  styleUrls: ['./movies.page.scss']
 })
 export class MoviesPage implements OnInit, OnDestroy {
 
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+  @ViewChild('container', { read: ElementRef }) container: ElementRef;
 
   movies: MovieModel[] = [];
   pagination: IPagination = { _page: 1, _limit: 5 };
@@ -28,7 +30,8 @@ export class MoviesPage implements OnInit, OnDestroy {
   constructor(
     private moviesFacade: MoviesFacade,
     public appFacade: AppFacade,
-    private router: Router
+    private router: Router,
+    private animationCtrl: AnimationController
   ) { }
 
   ngOnInit(): void {
@@ -52,10 +55,11 @@ export class MoviesPage implements OnInit, OnDestroy {
   getMovies(queryParams: IPagination): void {
     this.appFacade.loading = true;
     this.moviesFacade.getAllMovies(queryParams)
-      .pipe(
-        first(),
-        debounceTime(500),
-        tap((res: IApiResponse<MovieModel[]>) => this.movies = [...this.movies, ...res.data]),
+    .pipe(
+      first(),
+      debounceTime(500),
+      tap((res: IApiResponse<MovieModel[]>) => this.movies = [...this.movies, ...res.data]),
+      tap(() => this.playAnimation(this.createAnimation())),
         tap((res: IApiResponse<MovieModel[]>) => this.setTotal(res?.total)),
         tap(() => this.appFacade.loading = false),
         catchError((err: HttpErrorResponse) => {
@@ -63,6 +67,18 @@ export class MoviesPage implements OnInit, OnDestroy {
           return of(err);
         })
       ).subscribe();
+  }
+
+  playAnimation(animation: Animation): void {
+    animation.play();
+  }
+
+  createAnimation(): Animation {
+    const animation: Animation = this.animationCtrl.create()
+      .addElement(this.container.nativeElement)
+      .duration(700)
+      .fromTo('opacity', '0', '1');
+    return animation;
   }
 
   setTotal(total: number): void {
