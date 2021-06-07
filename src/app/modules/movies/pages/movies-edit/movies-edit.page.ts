@@ -7,6 +7,7 @@ import { tap, catchError } from 'rxjs/operators';
 import { ACTORS, STUDIOS } from '../../../../shared/constants/db.constants';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
+import { AppFacade } from '../../../../core/services/app.facade';
 
 
 @Component({
@@ -27,7 +28,8 @@ export class MoviesEditPage implements OnInit, OnDestroy {
     private moviesFacade: MoviesFacade,
     private router: Router,
     private route: ActivatedRoute,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private appFacade: AppFacade
   ) { }
 
   ngOnInit(): void {
@@ -88,6 +90,7 @@ export class MoviesEditPage implements OnInit, OnDestroy {
   create(movie: MovieModel): void {
     const createSub: Subscription = this.moviesFacade.createMovie(movie)
       .pipe(
+        tap(() => this.appFacade.successToast(this.translate.instant('toast.createdSuccess'))),
         tap(() => this.goBack())
       ).subscribe();
     this.subscriptions.push(createSub);
@@ -96,6 +99,7 @@ export class MoviesEditPage implements OnInit, OnDestroy {
   update(movie: MovieModel): void {
     const updateSub: Subscription = this.moviesFacade.updateMovie(movie)
       .pipe(
+        tap(() => this.appFacade.successToast(this.translate.instant('toast.updatedSuccess'))),
         tap(() => this.goBack())
       ).subscribe();
     this.subscriptions.push(updateSub);
