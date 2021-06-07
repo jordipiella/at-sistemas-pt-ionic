@@ -1,0 +1,6 @@
+<app-header [backButton]="true" [title]="title"></app-header>
+
+<ion-content [fullscreen]="true">
+  <app-loading *ngIf="!movie" [loading]="loading"></app-loading>
+  <app-movies-edit-form *ngIf="!loading" [movie]="movie" [studios]="STUDIOS" [actors]="ACTORS" (submitForm)="submitForm($event)"></app-movies-edit-form>
+</ion-content>

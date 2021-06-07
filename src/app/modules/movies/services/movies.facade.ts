@@ -4,6 +4,7 @@ import { MoviesService } from './movies/movies.service';
 import { MovieModel } from './movies/models/movie.model';
 import { IPagination } from '../../../core/api/interfaces/pagination.interface';
 import { IApiResponse } from '../../../core/api/interfaces/response.interface';
+import { MoviesState } from './movies-state/movies.state';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ import { IApiResponse } from '../../../core/api/interfaces/response.interface';
 export class MoviesFacade {
 
   constructor(
-    private moviesService: MoviesService
+    private moviesService: MoviesService,
+    private movieState: MoviesState
   ) { }
 
   getAllMovies(queryParams?: IPagination): Observable<IApiResponse<MovieModel[]>> {
@@ -32,6 +34,14 @@ export class MoviesFacade {
 
   deleteMovie(movieId: number): Observable<MovieModel> {
     return this.moviesService.delete(movieId);
+  }
+
+  get movieSelected(): MovieModel {
+    return this.movieState.movieSelected;
+  }
+
+  set movieSelected(movie: MovieModel) {
+    this.movieState.movieSelected = movie;
   }
 
 }

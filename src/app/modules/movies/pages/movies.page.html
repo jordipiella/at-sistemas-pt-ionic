@@ -17,9 +17,16 @@
     </ng-container>
   </ion-virtual-scroll>
 
+  <div class="w-full text-center h-20"></div>
+
   <ion-infinite-scroll threshold="15%" (ionInfinite)="loadData($event)" position="bottom">
     <ion-infinite-scroll-content>
       <app-loading [loading]="movies?.length && loading"></app-loading>
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="goToAddMovie()" color="success">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

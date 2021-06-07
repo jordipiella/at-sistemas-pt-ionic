@@ -1,6 +1,6 @@
 
 <div class="bg-white overflow-hidden h-full">
-  <img class="w-full h-56 object-cover object-center" [src]="movie?.poster" [alt]="movie?.title">
+    <img *ngIf="movie?.poster" class="w-full h-56 object-cover object-center" [src]="movie?.poster" [alt]="movie?.title">
   <div class="flex items-center px-6 py-3 bg-gray-900">
       <h1 class="mx-3 text-white font-semibold text-lg">{{ movie?.title }}</h1>
   </div>
@@ -21,10 +21,10 @@
         </div>
       </div>
     </div>
-    <div class="mt-4 text-gray-700">
+    <div *ngIf="movie?.actors?.length" class="mt-4 text-gray-700">
         <h3 class="">{{ 'movies.details.actors' | translate }}</h3>
         <p *ngFor="let actor of movie?.actors" class="text-gray-400">
-          {{ actor }}
+          {{ actor?.first_name }} {{ actor?.last_name }}
         </p>
     </div>
     <div *ngIf="movie?.studio" class="mt-4 text-gray-700">
@@ -33,7 +33,7 @@
           {{ movie?.studio }}
         </p>
     </div>
-    <div class="mt-4 text-gray-700">
+    <div *ngIf="movie?.genre?.length"  class="mt-4 text-gray-700">
         <h4 class="">{{ 'movies.details.genre' | translate }}</h4>
         <app-badge [badges]="movie?.genre"></app-badge>
     </div>

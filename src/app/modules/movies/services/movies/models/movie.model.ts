@@ -9,5 +9,5 @@ export class MovieModel {
   duration: number;
   imdbRating: number;
   studio: string;
-  actors: number[];
+  actors: any[];
 }

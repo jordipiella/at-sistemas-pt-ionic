@@ -7,7 +7,19 @@
       "year": "Año",
       "actors": "Actores",
       "duration": "Duración",
-      "studio": "Estudio"
+      "studio": "Estudio",
+      "title": "Título",
+      "poster": "Poster"
+    },
+    "edit": {
+      "new": "Nueva película",
+      "edit": "Editar película",
+      "save": "Save",
+      "imageUrl": "Url imagen",
+      "select": "Selecciona"
     }
+  },
+  "validations": {
+    "required": "{{ value }} es un campo requerido"
   }
 }

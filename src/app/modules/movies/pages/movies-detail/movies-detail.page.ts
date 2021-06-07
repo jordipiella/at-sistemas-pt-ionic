@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { catchError, first, tap } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { of, Subscription } from 'rxjs';
@@ -39,7 +39,6 @@ export class MoviesDetailPage implements OnInit, OnDestroy {
 
   getMovieId(): number {
     const movieId: string = this.route.snapshot.paramMap.get('movieId');
-    console.log(movieId)
     if (!movieId) {
       this.router.navigate(['../'], { relativeTo: this.route })
       return null;
@@ -53,6 +52,7 @@ export class MoviesDetailPage implements OnInit, OnDestroy {
       .pipe(
         first(),
         tap((movie: MovieModel) => this.movie = movie),
+        tap((movie: MovieModel) => this.moviesFacade.movieSelected = movie),
         tap(() => this.appFacade.loading = false),
         catchError((err: HttpErrorResponse) => {
           this.appFacade.loading = false;
@@ -76,5 +76,18 @@ export class MoviesDetailPage implements OnInit, OnDestroy {
   goBack(): void {
     this.router.navigate(['../'], { relativeTo: this.route });
   }
+
+  goToEdit(movieId: number): void {
+    this.router.navigate([`../edit/${ movieId }`], { relativeTo: this.route });
+  }
+
+  deleteMovie(movieId: number) {
+    const deleteSub: Subscription = this.moviesFacade.deleteMovie(movieId)
+      .pipe(
+        tap(() => this.goBack())
+      ).subscribe();
+    this.subscriptions.push(deleteSub);
+  }
+
 
 }

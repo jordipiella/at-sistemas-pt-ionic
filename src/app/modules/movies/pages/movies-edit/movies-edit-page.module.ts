@@ -1,28 +1,28 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { MoviesDetailPage } from './movies-detail.page';
-import { MoviesDetailPageRoutingModule } from './movies-detail-page-routing.module';
+import { MoviesEditPage } from './movies-edit.page';
+import { MoviesEditPageRoutingModule } from './movies-edit-page-routing.module';
 import { HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { httpLoaderFactory } from '../../../../shared/utils/http-loader.factory';
 import { CoreModule } from '../../../../core/core.module';
-import { MoviesDetailViewComponent } from './components/movies-detail-view/movies-detail-view.component';
+import { MoviesEditFormComponent } from './components/movies-edit-form/movies-edit-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 import { CustomFormsModule } from '../../../../shared/modules/custom-forms/custom-forms.module';
-import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
-    MoviesDetailPage,
-    MoviesDetailViewComponent
+    MoviesEditPage,
+    MoviesEditFormComponent
   ],
   imports: [
     CommonModule,
     IonicModule,
-    MoviesDetailPageRoutingModule,
+    MoviesEditPageRoutingModule,
     CoreModule,
-    FormsModule,
+    ReactiveFormsModule,
     CustomFormsModule,
     TranslateModule.forChild({
       loader: {
@@ -31,6 +31,10 @@ import { FormsModule } from '@angular/forms';
         deps: [HttpClient]
       }
     }),
+  ],
+  exports: [
+    MoviesEditPage,
+    MoviesEditFormComponent
   ]
 })
-export class MoviesDetailPageModule { }
+export class MoviesEditPageModule { }
