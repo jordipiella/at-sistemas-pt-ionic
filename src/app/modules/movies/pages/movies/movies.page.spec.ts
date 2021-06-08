@@ -3,7 +3,7 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { MoviesPage } from './movies.page';
 
-describe('FolderPage', () => {
+describe('MoviesPage', () => {
   let component: MoviesPage;
   let fixture: ComponentFixture<MoviesPage>;
 
