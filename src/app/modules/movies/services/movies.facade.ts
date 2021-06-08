@@ -3,21 +3,33 @@ import { Observable } from 'rxjs';
 import { MoviesService } from './movies/movies.service';
 import { MovieModel } from './movies/models/movie.model';
 import { IPagination } from '../../../core/api/interfaces/pagination.interface';
-import { IApiResponse } from '../../../core/api/interfaces/response.interface';
 import { MoviesState } from './movies-state/movies.state';
+import { select, Store } from '@ngrx/store';
+import { getMovies, resetStateMovies } from '../state/movies.actions';
+import { selectMovies, selectTotal, selectLoading } from '../state/movies.selector';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MoviesFacade {
 
+  allMovies$: Observable<MovieModel[]> = this.store.pipe(select(selectMovies));
+  total$: Observable<number> = this.store.pipe(select(selectTotal));
+  loading$: Observable<boolean> = this.store.pipe(select(selectLoading));
+
   constructor(
     private moviesService: MoviesService,
-    private movieState: MoviesState
+    private movieState: MoviesState,
+    private store: Store<MoviesState>
   ) { }
 
-  getAllMovies(queryParams?: IPagination): Observable<IApiResponse<MovieModel[]>> {
-    return this.moviesService.getAll(queryParams);
+  getAllMovies(queryParams?: IPagination): void {
+    this.store.dispatch(getMovies(queryParams));
+  }
+
+
+  resetMovies(): void {
+    this.store.dispatch(resetStateMovies());
   }
 
   getMovie(movieId: number): Observable<MovieModel> {

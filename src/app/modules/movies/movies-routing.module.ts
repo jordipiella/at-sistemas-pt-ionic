@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: 'list',
-    loadChildren: () => import('./pages/movies-page.module').then( m => m.MoviesPageModule)
+    loadChildren: () => import('./pages/movies/movies-page.module').then( m => m.MoviesPageModule)
   },
   {
     path: 'new',

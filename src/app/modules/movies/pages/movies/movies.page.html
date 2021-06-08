@@ -1,7 +1,7 @@
 <app-header [title]="'movies.title' | translate"></app-header>
 
 <ion-content [fullscreen]="true">
-  <app-loading *ngIf="loading && !movies.length" [loading]="loading"></app-loading>
+  <app-loading *ngIf="!movies.length && loading | async" [loading]="loading | async"></app-loading>
 
   <div #container>
     <ion-virtual-scroll [items]="movies" approxItemHeight="401px">
@@ -18,9 +18,9 @@
       </ng-container>
     </ion-virtual-scroll>
   </div>
-  <ion-infinite-scroll threshold="15%" (ionInfinite)="loadData($event)" position="bottom">
+  <ion-infinite-scroll threshold="20%" (ionInfinite)="loadData($event)" position="bottom">
     <ion-infinite-scroll-content>
-      <app-loading [loading]="movies?.length && loading"></app-loading>
+      <app-loading [loading]="movies?.length && loading | async"></app-loading>
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
   <div class="w-full text-center h-20"></div>

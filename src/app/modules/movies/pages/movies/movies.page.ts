@@ -1,13 +1,11 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AnimationController, IonInfiniteScroll } from '@ionic/angular';
-import { MovieModel } from '../services/movies/models/movie.model';
-import { MoviesFacade } from '../services/movies.facade';
-import { catchError, debounceTime, first, tap } from 'rxjs/operators';
-import { IPagination } from '../../../core/api/interfaces/pagination.interface';
-import { IApiResponse } from '../../../core/api/interfaces/response.interface';
-import { HttpErrorResponse } from '@angular/common/http';
-import { of, Subscription } from 'rxjs';
-import { AppFacade } from '../../../core/services/app.facade';
+import { MovieModel } from '../../services/movies/models/movie.model';
+import { MoviesFacade } from '../../services/movies.facade';
+import { debounceTime, distinctUntilChanged, take, tap } from 'rxjs/operators';
+import { IPagination } from '../../../../core/api/interfaces/pagination.interface';
+import { Subscription, Observable } from 'rxjs';
+import { AppFacade } from '../../../../core/services/app.facade';
 import { Router } from '@angular/router';
 import { Animation } from '@ionic/core';
 
@@ -24,11 +22,11 @@ export class MoviesPage implements OnInit, OnDestroy {
   movies: MovieModel[] = [];
   pagination: IPagination = { _page: 1, _limit: 5 };
   total: number;
-  loading: boolean = false;
+  loading: Observable<boolean> = this.moviesFacade.loading$;
   subscriptions: Subscription[] = [];
 
   constructor(
-    private moviesFacade: MoviesFacade,
+    public moviesFacade: MoviesFacade,
     public appFacade: AppFacade,
     private router: Router,
     private animationCtrl: AnimationController
@@ -38,35 +36,46 @@ export class MoviesPage implements OnInit, OnDestroy {
   }
 
   ionViewWillEnter(): void {
+    this.moviesFacade.resetMovies();
     this.movies = [];
     this.pagination = { _page: 1, _limit: 5 };
-    this.loadingSubscription();
+    this.allMoviesSubscription();
     this.getMovies(this.pagination);
+    this.totalSubscription();
   }
 
   ionViewDidLeave(): void {
-    this.subscriptions.forEach((subs: Subscription) => subs.unsubscribe);
+    this.subscriptions.forEach((subs: Subscription) => subs.unsubscribe());
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach((subs: Subscription) => subs.unsubscribe);
+    this.subscriptions.forEach((subs: Subscription) => subs.unsubscribe());
+  }
+
+  allMoviesSubscription(): void {
+    const mSubs: Subscription = this.moviesFacade.allMovies$
+      .pipe(
+        debounceTime(500),
+        tap((res: MovieModel[]) => this.addMoreMovies(res)),
+        tap(() => this.playAnimation(this.createAnimation())),
+      ).subscribe();
+    this.subscriptions.push(mSubs);
+  }
+
+  addMoreMovies(movies: MovieModel[]) {
+    this.movies = [...this.movies, ...movies];
+  }
+
+  totalSubscription(): void {
+    const totalSub: Subscription = this.moviesFacade.total$
+      .pipe(
+        tap((total: number) => this.setTotal(total))
+      ).subscribe();
+    this.subscriptions.push(totalSub);
   }
 
   getMovies(queryParams: IPagination): void {
-    this.appFacade.loading = true;
-    this.moviesFacade.getAllMovies(queryParams)
-    .pipe(
-      first(),
-      debounceTime(500),
-      tap((res: IApiResponse<MovieModel[]>) => this.movies = [...this.movies, ...res.data]),
-      tap(() => this.playAnimation(this.createAnimation())),
-        tap((res: IApiResponse<MovieModel[]>) => this.setTotal(res?.total)),
-        tap(() => this.appFacade.loading = false),
-        catchError((err: HttpErrorResponse) => {
-          this.appFacade.loading = false;
-          return of(err);
-        })
-      ).subscribe();
+    this.moviesFacade.getAllMovies(queryParams);
   }
 
   playAnimation(animation: Animation): void {
@@ -76,7 +85,7 @@ export class MoviesPage implements OnInit, OnDestroy {
   createAnimation(): Animation {
     const animation: Animation = this.animationCtrl.create()
       .addElement(this.container.nativeElement)
-      .duration(700)
+      .duration(500)
       .fromTo('opacity', '0', '1');
     return animation;
   }
@@ -84,7 +93,6 @@ export class MoviesPage implements OnInit, OnDestroy {
   setTotal(total: number): void {
     this.total = (total) ? total : null;
   }
-
 
   loadData(event: any): void {
     if (this.movies.length < this.total) {
@@ -94,17 +102,6 @@ export class MoviesPage implements OnInit, OnDestroy {
     event?.target?.complete();
   }
 
-  loadingSubscription(): void {
-    const loadingSubs: Subscription = this.appFacade.loading$
-      .pipe(
-        tap((loading: boolean) => this.setLoading(loading))
-      ).subscribe();
-    this.subscriptions.push(loadingSubs);
-  }
-
-  setLoading(value: boolean) {
-    this.loading = value;
-  }
 
   goToDetailPage(movie: MovieModel): void {
     if (!movie?.id) {

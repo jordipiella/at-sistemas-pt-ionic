@@ -6,6 +6,7 @@ import { environment } from '../../../../../environments/environment';
 import { API_URL_MOVIES } from '../../../services/language/constants/api-url.constants';
 import { MovieContract } from './contracts/movie.contract';
 import { movieMockContract } from './mocks/movie-mock.contract';
+import { IApiResponse } from '../../interfaces/response.interface';
 
 describe('ApiMoviesService', () => {
   let service: ApiMoviesService;
@@ -30,9 +31,9 @@ describe('ApiMoviesService', () => {
   });
 
   describe('#getAll()', () => {
-    it('should call correct url and return a Observable<MovieContract[]>', () => {
+    it('should call correct url and return a Observable<IApiResponse<MovieContract[]>>', () => {
       let result: MovieContract[];
-      service.getAll().subscribe((movies: MovieContract[]) => result = movies);
+      service.getAll().subscribe((res: IApiResponse<MovieContract[]>) => result = res.data);
       const req: TestRequest = httpMock.expectOne(`${ environment.apiMoviesUrl }/${ API_URL_MOVIES }`);
       expect(req.request.method).toBe('GET');
       req.flush([movieMockContract]);
