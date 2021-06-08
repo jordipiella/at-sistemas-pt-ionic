@@ -2,7 +2,7 @@ import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/co
 import { AnimationController, IonInfiniteScroll } from '@ionic/angular';
 import { MovieModel } from '../../services/movies/models/movie.model';
 import { MoviesFacade } from '../../services/movies.facade';
-import { debounceTime, tap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, take, tap } from 'rxjs/operators';
 import { IPagination } from '../../../../core/api/interfaces/pagination.interface';
 import { Subscription, Observable } from 'rxjs';
 import { AppFacade } from '../../../../core/services/app.facade';
@@ -36,10 +36,20 @@ export class MoviesPage implements OnInit, OnDestroy {
   }
 
   ionViewWillEnter(): void {
+    this.moviesFacade.resetMovies();
+    this.movies = [];
     this.pagination = { _page: 1, _limit: 5 };
     this.allMoviesSubscription();
     this.getMovies(this.pagination);
     this.totalSubscription();
+  }
+
+  ionViewDidLeave(): void {
+    this.subscriptions.forEach((subs: Subscription) => subs.unsubscribe());
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subs: Subscription) => subs.unsubscribe());
   }
 
   allMoviesSubscription(): void {
@@ -62,14 +72,6 @@ export class MoviesPage implements OnInit, OnDestroy {
         tap((total: number) => this.setTotal(total))
       ).subscribe();
     this.subscriptions.push(totalSub);
-  }
-
-  ionViewDidLeave(): void {
-    this.subscriptions.forEach((subs: Subscription) => subs.unsubscribe);
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((subs: Subscription) => subs.unsubscribe);
   }
 
   getMovies(queryParams: IPagination): void {

@@ -5,7 +5,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 export const getMovies = createAction(
     '[Movies] - get Movies List',
     props<{ _page: number; _limit: number; }>()
-
 );
 
 export const getMoviesSuccess = createAction(
@@ -16,4 +15,8 @@ export const getMoviesSuccess = createAction(
 export const getMoviesFailure = createAction(
     '[Movies] - get Movies list failure',
     props<{ error: HttpErrorResponse }>()
+);
+
+export const resetStateMovies = createAction(
+    '[Movies] - reset movies data'
 );

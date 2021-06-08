@@ -35,7 +35,7 @@ export class MoviesDetailPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach((subs: Subscription) => subs.unsubscribe);
+    this.subscriptions.forEach((subs: Subscription) => subs.unsubscribe());
   }
 
   getMovieId(): number {

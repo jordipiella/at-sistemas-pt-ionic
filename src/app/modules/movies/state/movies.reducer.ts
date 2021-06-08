@@ -41,5 +41,8 @@ export const reducer = createReducer(
             error: action.error,
             loading: false
         };
+    }),
+    on(moviesAction.resetStateMovies, (state, action) => {
+        return initialState;
     })
 );

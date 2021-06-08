@@ -5,7 +5,7 @@ import { MovieModel } from './movies/models/movie.model';
 import { IPagination } from '../../../core/api/interfaces/pagination.interface';
 import { MoviesState } from './movies-state/movies.state';
 import { select, Store } from '@ngrx/store';
-import { getMovies } from '../state/movies.actions';
+import { getMovies, resetStateMovies } from '../state/movies.actions';
 import { selectMovies, selectTotal, selectLoading } from '../state/movies.selector';
 
 @Injectable({
@@ -25,6 +25,11 @@ export class MoviesFacade {
 
   getAllMovies(queryParams?: IPagination): void {
     this.store.dispatch(getMovies(queryParams));
+  }
+
+
+  resetMovies(): void {
+    this.store.dispatch(resetStateMovies());
   }
 
   getMovie(movieId: number): Observable<MovieModel> {

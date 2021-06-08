@@ -45,7 +45,7 @@ export class MoviesEditPage implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.moviesFacade.movieSelected = null;
-    this.subscriptions.forEach((subs: Subscription) => subs.unsubscribe);
+    this.subscriptions.forEach((subs: Subscription) => subs.unsubscribe());
   }
 
   setTitle(movieId: string): void {
