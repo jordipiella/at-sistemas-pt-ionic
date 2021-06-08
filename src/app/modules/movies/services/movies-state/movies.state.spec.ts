@@ -6,7 +6,7 @@ import { movieMockModel } from '../movies/mocks/movie-mock.model';
 import { MovieModel } from '../movies/models/movie.model';
 import { MoviesState } from './movies.state';
 
-fdescribe('MoviesState', () => {
+describe('MoviesState', () => {
   let service: MoviesState;
   const movieModel: MovieModel = movieMockModel;
 

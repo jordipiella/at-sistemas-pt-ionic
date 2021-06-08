@@ -7,8 +7,9 @@ import { movieMockModel } from './mocks/movie-mock.model';
 import { MovieModel } from './models/movie.model';
 import { ApiMoviesService } from '../../../../core/api/services/api-movies/api-movies.service';
 import { of } from 'rxjs';
+import { IApiResponse } from '../../../../core/api/interfaces/response.interface';
 
-fdescribe('MoviesService', () => {
+describe('MoviesService', () => {
   let service: MoviesService;
 
   const movieContrat: MovieContract = movieMockContract;
@@ -40,10 +41,10 @@ fdescribe('MoviesService', () => {
   });
 
   describe('#getAll()', () => {
-    it('should call apiMovies.getAll and return a Observable<MovieModel[]>', () => {
+    it('should call apiMovies.getAll and return a Observable<IApiResponse<MovieModel[]>>', () => {
       service.getAll()
-        .subscribe((movies: MovieModel[]) => {
-          expect(movies).toEqual([movieModel, movieModel, movieModel]);
+        .subscribe((res: IApiResponse<MovieModel[]>) => {
+          expect(res.data).toEqual([movieModel, movieModel, movieModel]);
         });
       expect(apiMovies.getAll).toHaveBeenCalled();
     });

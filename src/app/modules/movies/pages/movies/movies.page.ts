@@ -1,12 +1,12 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AnimationController, IonInfiniteScroll } from '@ionic/angular';
-import { MovieModel } from '../services/movies/models/movie.model';
-import { MoviesFacade } from '../services/movies.facade';
+import { MovieModel } from '../../services/movies/models/movie.model';
+import { MoviesFacade } from '../../services/movies.facade';
 import { catchError, debounceTime, tap } from 'rxjs/operators';
-import { IPagination } from '../../../core/api/interfaces/pagination.interface';
+import { IPagination } from '../../../../core/api/interfaces/pagination.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { of, Subscription, Observable } from 'rxjs';
-import { AppFacade } from '../../../core/services/app.facade';
+import { AppFacade } from '../../../../core/services/app.facade';
 import { Router } from '@angular/router';
 import { Animation } from '@ionic/core';
 
