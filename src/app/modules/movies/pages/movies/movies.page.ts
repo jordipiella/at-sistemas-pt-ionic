@@ -2,10 +2,9 @@ import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/co
 import { AnimationController, IonInfiniteScroll } from '@ionic/angular';
 import { MovieModel } from '../../services/movies/models/movie.model';
 import { MoviesFacade } from '../../services/movies.facade';
-import { catchError, debounceTime, tap } from 'rxjs/operators';
+import { debounceTime, tap } from 'rxjs/operators';
 import { IPagination } from '../../../../core/api/interfaces/pagination.interface';
-import { HttpErrorResponse } from '@angular/common/http';
-import { of, Subscription, Observable } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { AppFacade } from '../../../../core/services/app.facade';
 import { Router } from '@angular/router';
 import { Animation } from '@ionic/core';
@@ -37,25 +36,29 @@ export class MoviesPage implements OnInit, OnDestroy {
   }
 
   ionViewWillEnter(): void {
-    this.movies = [];
     this.pagination = { _page: 1, _limit: 5 };
+    this.allMoviesSubscription();
     this.getMovies(this.pagination);
+    this.totalSubscription();
+  }
+
+  allMoviesSubscription(): void {
     const mSubs: Subscription = this.moviesFacade.allMovies$
       .pipe(
         debounceTime(500),
-        tap((res: MovieModel[]) => this.movies = [...this.movies, ...res]),
+        tap((res: MovieModel[]) => this.addMoreMovies(res)),
         tap(() => this.playAnimation(this.createAnimation())),
-        tap(() => this.appFacade.loading = false),
-        catchError((err: HttpErrorResponse) => {
-          this.appFacade.loading = false;
-          return of(err);
-        })
       ).subscribe();
     this.subscriptions.push(mSubs);
+  }
 
+  addMoreMovies(movies: MovieModel[]) {
+    this.movies = [...this.movies, ...movies];
+  }
+
+  totalSubscription(): void {
     const totalSub: Subscription = this.moviesFacade.total$
       .pipe(
-        tap((x) => console.log(x)),
         tap((total: number) => this.setTotal(total))
       ).subscribe();
     this.subscriptions.push(totalSub);
@@ -71,7 +74,6 @@ export class MoviesPage implements OnInit, OnDestroy {
 
   getMovies(queryParams: IPagination): void {
     this.moviesFacade.getAllMovies(queryParams);
-
   }
 
   playAnimation(animation: Animation): void {
