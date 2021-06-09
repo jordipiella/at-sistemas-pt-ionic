@@ -22,7 +22,6 @@ export class MoviesTranslator {
 
   static hydrateActors(movie: MovieModel): MovieModel {
     const actors: any[] = ACTORS;
-    console.log(movie, ACTORS)
     movie.actors = (movie?.actors?.length) ? movie.actors.map((id: number) => actors.find((actor: any) => actor.id === id)) : [];
     return movie;
   }

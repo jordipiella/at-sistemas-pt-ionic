@@ -40,7 +40,6 @@ export class MoviesDetailPage implements OnInit, OnDestroy {
 
   getMovieId(): number {
     const movieId: string = this.route.snapshot.paramMap.get('movieId');
-    console.log(movieId)
     if (!movieId) {
       this.router.navigate(['../'], { relativeTo: this.route })
       return null;
