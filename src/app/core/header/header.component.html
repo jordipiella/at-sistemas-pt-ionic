@@ -1,0 +1,18 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-back-button
+      *ngIf="backButton"
+      slot="start"
+      defaultHref="movies"
+      icon="arrow-back"
+      text=""
+      color="secondary"
+    >
+    </ion-back-button>
+    <ion-title>{{ title }}</ion-title>
+    <app-switch-language slot="end"></app-switch-language>
+  </ion-toolbar>
+</ion-header>

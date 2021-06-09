@@ -1,0 +1,21 @@
+<div class="mt-1 flex rounded-md shadow-sm" [formGroup]="addBadgeForm">
+  <input
+    formControlName="badgeText"
+    type="text"
+    name="genre"
+    id="genre"
+    class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-l-md sm:text-sm border-gray-300 text-gray-700"
+  >
+  <span
+    (click)="addBadge()"
+    class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-sm cursor-pointer"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+    </svg>
+  </span>
+</div>
+
+<div class="w-full my-4">
+  <app-badge [badges]="badges" [deleteOption]="true" (badgeClicked)="removeBadge($event)"></app-badge>
+</div>

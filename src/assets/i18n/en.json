@@ -1,0 +1,30 @@
+{
+  "movies": {
+    "title": "Movies",
+    "details": {
+      "score": "Score",
+      "genre": "Genre",
+      "year": "Year",
+      "actors": "Actors",
+      "duration": "Duration",
+      "studio": "Studio",
+      "title": "Ttile",
+      "poster": "Poster"
+    },
+    "edit": {
+      "new": "New movie",
+      "edit": "Edit movie",
+      "save": "Guardar",
+      "imageUrl": "Url imagen",
+      "select": "Select"
+    }
+  },
+  "validations": {
+    "required": "The {{ value }} field is required."
+  },
+  "toast": {
+    "deletedSuccess": "Success deleted",
+    "updatedSuccess": "Success updated",
+    "createdSuccess": "Success created"
+  }
+}

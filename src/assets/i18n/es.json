@@ -1,0 +1,30 @@
+{
+  "movies": {
+    "title": "Películas",
+    "details": {
+      "score": "Puntuación",
+      "genre": "Géneros",
+      "year": "Año",
+      "actors": "Actores",
+      "duration": "Duración",
+      "studio": "Estudio",
+      "title": "Título",
+      "poster": "Poster"
+    },
+    "edit": {
+      "new": "Nueva película",
+      "edit": "Editar película",
+      "save": "Save",
+      "imageUrl": "Url imagen",
+      "select": "Selecciona"
+    }
+  },
+  "validations": {
+    "required": "{{ value }} es un campo requerido"
+  },
+  "toast": {
+    "deletedSuccess": "Eliminado correctamente",
+    "updatedSuccess": "Actualizado correctamente",
+    "createdSuccess": "Creado correctamente"
+  }
+}

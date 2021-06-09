@@ -1,0 +1,6 @@
+<ng-container *ngFor="let lang of appFacade?.languages">
+  <ion-button [disabled]="appFacade?.currentLang === lang" slot="end" color="light" size="small" shape="round" (click)="setLanguage(lang)">
+    {{ lang }}
+  </ion-button>
+</ng-container>
+

@@ -1,0 +1,19 @@
+<ion-card class="card">
+  <ion-card-header>
+    <ng-container *ngTemplateOutlet="header"></ng-container>
+    <div *ngIf="card?.imageUrl" class="image" [style.background-image]="'url(' + card.imageUrl + ')'"></div>
+    <ion-card-subtitle *ngIf="card?.subTitle">{{ card.subTitle }}</ion-card-subtitle>
+    <ion-card-title *ngIf="card?.title">{{ card.title }}</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ng-container *ngTemplateOutlet="content"></ng-container>
+    <p *ngIf="card?.description">
+      {{ card.description }}
+    </p>
+    <ng-container *ngIf="card?.badges?.length">
+      <ion-badge *ngFor="let badge of card?.badges" color="primary">
+        #{{ badge }}
+      </ion-badge>
+    </ng-container>
+  </ion-card-content>
